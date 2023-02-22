@@ -7,20 +7,35 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export default class Navbar extends Component { 
     constructor(props) {
         super(props);
-        this.state = {colorFormat: 'hex'};
+        this.state = {
+            colorFormat: 'hex',
+            open: false
+        };
         this.handleChange = this.handleChange.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
     handleChange(evt) {
-        this.setState({ colorFormat: evt.target.value });
+        this.setState({ colorFormat: evt.target.value, open: true });
         this.props.handleChange(evt.target.value);
     }
+    handleClose(evt, reason) {
+        if (reason === 'clickaway') {
+            return;
+        }
+        this.setState({ open: false });
+    }
+ 
     render() {
         const { level, changeLevel } = this.props
-        const { colorFormat } = this.state;
+        const { colorFormat, open } = this.state;
         return (
             <header className='Navbar'>
                 <div className="logo">
@@ -68,6 +83,23 @@ export default class Navbar extends Component {
                         </FormControl>
                     </Box>
                 </div>
+                <Snackbar
+                    open={open}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                    autoHideDuration={3000}
+                    onClose={this.handleClose}
+                    message={`Color Format changed to ${colorFormat.toUpperCase()}`}
+                    action={[
+                        <IconButton
+                            size="small"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={this.handleClose}
+                        >
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    ]}
+                />
             </header>
         )
     }
