@@ -18,7 +18,6 @@ export default class Palette extends Component {
     }
     changeFormat(val) {
         this.setState({colorFormat: val});
-        
     }
     render() { 
         const { level, colorFormat } = this.state;
