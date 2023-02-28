@@ -34,6 +34,7 @@ const styles = {
 }
 
 class PaletteList extends Component { 
+ 
     render() {
         const {palettes, classes} = this.props
         return (

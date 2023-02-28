@@ -1,12 +1,9 @@
 import React from 'react'
 import { withStyles } from 'react-jss'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const styles = {
-    link: {
-        textDecoration: 'none',
-    },
     root: {
         backgroundColor: "white",
         border: '1px solid black',
@@ -39,7 +36,7 @@ const styles = {
         margin: "0",
         alignItems: "center",
         color: "black",
-        paddingTop: "0.5rem",
+        paddingBottom: "0.8rem",
         fontSize: "1rem",
         position: "relative"
     },
@@ -51,10 +48,14 @@ const styles = {
 }
 
 function MiniPalette(props) {
-    const {classes, paletteName, emoji, id, colors} = props;
+    const { classes, paletteName, emoji, id, colors } = props;
+    const navigate = useNavigate();
+    const handleClick = e => {
+        e.preventDefault();
+        navigate(`/palette/${id}`);
+    }
     return (
-        <Link to={`palette/${id}`} className={classes.link}>
-            <div className={classes.root}>
+            <div className={classes.root} onClick={handleClick}>
                 <div className={classes.colors}>
                     {colors.map(color =>
                         <div
@@ -66,7 +67,6 @@ function MiniPalette(props) {
                 </div>
                 <h5 className={classes.title}>{paletteName} <span className={classes.emoji}>{emoji}</span></h5>
             </div>
-        </Link>
     )
 }
 export default withStyles(styles)(MiniPalette);
