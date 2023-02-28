@@ -47,8 +47,7 @@ const styles = {
     }
 }
 
-function MiniPalette(props) {
-    const { classes, paletteName, emoji, id, colors } = props;
+function MiniPalette({ classes, paletteName, emoji, id, colors }) {
     const navigate = useNavigate();
     const handleClick = e => {
         e.preventDefault();

@@ -3,6 +3,7 @@ import seedColors from './seedColors'
 import { generatePalette } from './colorHelpers'
 import { Routes, Route, useParams } from 'react-router-dom'
 import PaletteList from './PaletteList'
+import SingleColorPalette from './SingleColorPalette'
 
 const findPalette = id => seedColors.find(palette => palette.id === id);
   const GetPalette = () => {
@@ -14,8 +15,9 @@ const findPalette = id => seedColors.find(palette => palette.id === id);
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<PaletteList palettes={seedColors} />}/>
-      <Route path='/palette/:id' element={<GetPalette />} />
+      <Route index element={<PaletteList palettes={seedColors} />}/>
+      <Route path='/palette/:id' element={<GetPalette />}/>
+      <Route path='/palette/:paletteId/:colorId' element={<SingleColorPalette />}/>
       <Route path='*' element={<h1>Page Not Found</h1>} />
     </Routes>
   );
