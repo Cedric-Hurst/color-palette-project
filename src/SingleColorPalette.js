@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import ColorBox from './ColorBox';
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
+import Navbar from './Navbar';
+import PaletteFooter from './PaletteFooter';
 
 export default class SingleColorPalette extends Component { 
     constructor(props) {
         super(props);
+        this.state = {
+            colorFormat: 'hex'
+        }
         this._shades = this.gatherShades(this.props.palette, this.props.colorId);
-        console.log(this._shades)
+        this.changeFormat = this.changeFormat.bind(this);
     }
     gatherShades(palette, colorToFilterBy) {
         let shades = [];
@@ -18,16 +23,25 @@ export default class SingleColorPalette extends Component {
         shades.shift(); // remove the first color because its always just white
         return shades;
     }
+    changeFormat(val) {
+        this.setState({colorFormat: val});
+    }
     render() {
+        const { colorFormat } = this.state;
+        const { paletteName, emoji } = this.props.palette;
         const colorBoxes = this._shades.map(color =>
-            <ColorBox key={uuid()} name={color.name} color={color.hex} showLink={false} />
+            <ColorBox key={uuid()} name={color.name} color={color[colorFormat]} showLink={false} />
         );
         return (
             <div className='Palette'>
-                <h1>Single Color Palette</h1>
+                 <Navbar
+                    handleChange={this.changeFormat}
+                    showSlider={false}
+                />
                 <div className='Palette-colors'>
                     {colorBoxes}
                 </div>
+                <PaletteFooter paletteName={paletteName} emoji={ emoji } />     
             </div>
         )
     }

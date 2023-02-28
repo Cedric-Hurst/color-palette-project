@@ -34,37 +34,39 @@ export default class Navbar extends Component {
     }
  
     render() {
-        const { level, changeLevel } = this.props
+        const { level, changeLevel, showSlider } = this.props
         const { colorFormat, open } = this.state;
         return (
             <header className='Navbar'>
                 <div className="logo">
                     <Link to='/'>React Color Picker</Link>
                 </div>
-                <div className='slider-container'>
-                    <span>Level: {level}</span>
-                    <div className='slider'>
-                        <Slider
-                            defaultValue={level}
-                            min={100}
-                            max={900}
-                            onChange={changeLevel}
-                            step={100}
-                            trackStyle={{ backgroundColor: 'transparent' }}
-                            railStyle={{ height: '8px' }}
-                            handleStyle={{
-                                backgroundColor: ' green',
-                                outline: 'none',
-                                border: '2px solid green',
-                                boxShadow: 'none',
-                                height: '13px',
-                                width: '13px',
-                                marginLeft: '-7px',
-                                marginTop: '-3px'
-                            }}
-                        />
+                {showSlider &&
+                    <div className='slider-container'>
+                        <span>Level: {level}</span>
+                        <div className='slider'>
+                            <Slider
+                                defaultValue={level}
+                                min={100}
+                                max={900}
+                                onChange={changeLevel}
+                                step={100}
+                                trackStyle={{ backgroundColor: 'transparent' }}
+                                railStyle={{ height: '8px' }}
+                                handleStyle={{
+                                    backgroundColor: ' green',
+                                    outline: 'none',
+                                    border: '2px solid green',
+                                    boxShadow: 'none',
+                                    height: '13px',
+                                    width: '13px',
+                                    marginLeft: '-7px',
+                                    marginTop: '-3px'
+                                }}
+                            />
                         </div>
-                </div>
+                    </div>
+                }
                 <div className='select-container'>
                     <Box sx={{ minWidth: 100 }}>
                         <FormControl fullWidth>
