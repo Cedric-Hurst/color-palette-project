@@ -1,6 +1,7 @@
 import React from 'react'
 import { withStyles } from 'react-jss'
 import { useNavigate } from 'react-router-dom'
+import {v4 as uuid} from 'uuid'
 
 
 const styles = {
@@ -60,7 +61,7 @@ function MiniPalette({ classes, paletteName, emoji, id, colors }) {
                         <div
                             className={classes.miniColor}
                             style={{ backgroundColor: color.color }}
-                            key={color.name}
+                            key={uuid()}
                         />
                     )}
                 </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ColorBox from './ColorBox'
 import './Palette.css'
 import Navbar from './Navbar';
+import {v4 as uuid} from 'uuid'
+
 
 export default class Palette extends Component { 
     constructor(props) { 
@@ -26,9 +28,10 @@ export default class Palette extends Component {
             <ColorBox
                 color={color[colorFormat]}
                 name={color.name}
-                key={color.id}
+                key={uuid()}
                 paletteId={id}
                 colorId={color.id}
+                showLink={true}
             />
         )
         return (

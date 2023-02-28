@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import MiniPalette from './MiniPalette'
 import { withStyles } from 'react-jss'
+import {v4 as uuid} from 'uuid'
+
 
 const styles = {
     root: {
@@ -45,7 +47,7 @@ class PaletteList extends Component {
                     </nav>
                     <div className={classes.palettes}>
                         {palettes.map(palette =>
-                            <MiniPalette key={palette.id}{...palette} />
+                            <MiniPalette key={uuid()}{...palette} />
                         )}
                     </div>
                 </div>
