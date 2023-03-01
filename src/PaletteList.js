@@ -3,6 +3,7 @@ import MiniPalette from './MiniPalette'
 import { withStyles } from 'react-jss'
 import {v4 as uuid} from 'uuid'
 import styles from './styles/PaletteListStyles'
+import { Link } from 'react-router-dom'
 class PaletteList extends Component { 
  
     render() {
@@ -12,6 +13,7 @@ class PaletteList extends Component {
                 <div className={classes.container}>
                     <nav className={classes.nav}>
                         <h1>React Colors</h1>
+                        <Link to='/palette/new'>Create New Palette</Link>
                     </nav>
                     <div className={classes.palettes}>
                         {palettes.map(palette =>

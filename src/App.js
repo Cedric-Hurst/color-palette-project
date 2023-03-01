@@ -1,9 +1,10 @@
 import Palette from './Palette'
 import seedColors from './seedColors'
 import { generatePalette } from './colorHelpers'
-import { Routes, Route, useParams } from 'react-router-dom'
+import { Routes, Route, useParams, Navigate } from 'react-router-dom'
 import PaletteList from './PaletteList'
 import SingleColorPalette from './SingleColorPalette'
+import NewPaletteForm from './NewPaletteForm'
 
 const findPalette = id => seedColors.find(palette => palette.id === id);
   const GetPalette = () => {
@@ -23,9 +24,13 @@ const GetSinglePalette = () => {
 function App() {
   return (
     <Routes>
-      <Route index element={<PaletteList palettes={seedColors} />}/>
-      <Route path='/palette/:id' element={<GetPalette />}/>
-      <Route path='/palette/:paletteId/:colorId' element={<GetSinglePalette />}/>
+      <Route index element={<PaletteList palettes={seedColors} />} />
+      <Route path='/palette'>
+        <Route index element={<Navigate to='/'/>}/>
+        <Route path='new' element={<NewPaletteForm />}/>
+        <Route path=':id' element={<GetPalette />}/>
+        <Route path=':paletteId/:colorId' element={<GetSinglePalette />} /> 
+      </Route>
       <Route path='*' element={<h1>Page Not Found</h1>} />
     </Routes>
   );
