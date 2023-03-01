@@ -1,21 +1,10 @@
 import React, { Component } from 'react'
 import ColorBox from './ColorBox'
-import './Palette.css'
 import Navbar from './Navbar';
 import { v4 as uuid } from 'uuid'
 import PaletteFooter from './PaletteFooter';
 import { withStyles } from 'react-jss'
-
-const styles = {
-    Palette: {
-        height: '97vh',
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    colors: {
-        height: '90%',
-    },
-}
+import styles from './styles/PaletteStyles'
 class Palette extends Component { 
     constructor(props) { 
         super(props);

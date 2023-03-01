@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,8 +10,10 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
+import styles from './styles/NavbarStyles'
+import withStyles from 'react-jss';
 
-export default class Navbar extends Component { 
+class Navbar extends Component { 
     constructor(props) {
         super(props);
         this.state = {
@@ -34,17 +35,17 @@ export default class Navbar extends Component {
     }
  
     render() {
-        const { level, changeLevel, showSlider } = this.props
+        const { level, changeLevel, showSlider, classes } = this.props
         const { colorFormat, open } = this.state;
         return (
-            <header className='Navbar'>
-                <div className="logo">
+            <header className={classes.Navbar}>
+                <div className={classes.logo}>
                     <Link to='/'>React Color Picker</Link>
                 </div>
                 {showSlider &&
-                    <div className='slider-container'>
+                    <div>
                         <span>Level: {level}</span>
-                        <div className='slider'>
+                        <div className={classes.slider}>
                             <Slider
                                 defaultValue={level}
                                 min={100}
@@ -67,7 +68,7 @@ export default class Navbar extends Component {
                         </div>
                     </div>
                 }
-                <div className='select-container'>
+                <div className={classes.selectContainer}>
                     <Box sx={{ minWidth: 100 }}>
                         <FormControl fullWidth>
                             <InputLabel id="select">Color Format</InputLabel>
@@ -106,3 +107,4 @@ export default class Navbar extends Component {
         )
     }
 }
+export default withStyles(styles)(Navbar);

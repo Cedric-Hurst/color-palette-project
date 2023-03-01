@@ -1,17 +1,5 @@
-.Palette-footer {
-	background: white;
-	height: 5vh;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	font-weight: bold;
-}
-.emoji {
-	font-size: 2rem;
-	margin: 1rem;
-}
-
-/* PaletteFooter: {
+const styles = {
+    PaletteFooter: {
         background: 'white',
         height: '5vh',
         display: 'flex',
@@ -22,4 +10,6 @@
     emoji: {
         fontSize: '2rem',
         margin: '1rem',
-    } */
+    } 
+}
+export default styles;
