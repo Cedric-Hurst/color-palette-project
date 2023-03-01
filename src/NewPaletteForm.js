@@ -10,9 +10,11 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ChromePicker } from 'react-color';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -71,48 +73,56 @@ export default function NewPaletteForm() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Create New Color Palette
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+            <Toolbar>
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" noWrap component="div">
+                    Create New Color Palette
+                </Typography>
+            </Toolbar>
+        </AppBar>
+        <Drawer
+            sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+            },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+        >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
+            <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon />
+            </IconButton>
         </DrawerHeader>
-        <Divider />
-        
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-       
-      </Main>
+            <Divider />
+            <Typography variant='h4'>
+                Design Your Palette
+            </Typography>
+            <Stack direction="row">
+                <Button variant="contained" color="secondary">Clear Palette</Button>
+                <Button variant="contained" color="primary">Random Color</Button>
+            </Stack>
+            <ChromePicker />
+            <Button variant="contained" color="primary">Add Color</Button>
+        </Drawer>
+        <Main open={open}>
+            <DrawerHeader />
+              
+        </Main>
     </Box>
   );
 }
