@@ -5,29 +5,35 @@ import { Routes, Route, useParams, Navigate } from 'react-router-dom'
 import PaletteList from './PaletteList'
 import SingleColorPalette from './SingleColorPalette'
 import NewPaletteForm from './NewPaletteForm'
+import { useState } from 'react'
 
-const findPalette = id => seedColors.find(palette => palette.id === id);
+function App() {
+  const [palettes, setPalettes] = useState(seedColors);
+
+  const findPalette = id => palettes.find(palette => palette.id === id);
   const GetPalette = () => {
     const { id } = useParams();
     const palette = generatePalette(findPalette(id))
     return <Palette palette={palette} />
   }
-const GetSinglePalette = () => { 
+  const GetSinglePalette = () => { 
     const { paletteId, colorId } = useParams();
     const palette = generatePalette(findPalette(paletteId))
-  return <SingleColorPalette
-    palette={palette}
-    colorId={colorId}
-  />
-}
+    return <SingleColorPalette
+      palette={palette}
+      colorId={colorId}
+    />
+  }
+  const savePalette = (newPalette) => {
+    setPalettes([...palettes, newPalette]);
+  }
 
-function App() {
   return (
     <Routes>
-      <Route index element={<PaletteList palettes={seedColors} />} />
+      <Route index element={<PaletteList palettes={palettes} />} />
       <Route path='/palette'>
         <Route index element={<Navigate to='/'/>}/>
-        <Route path='new' element={<NewPaletteForm />}/>
+        <Route path='new' element={<NewPaletteForm savePalette={savePalette} />}/>
         <Route path=':id' element={<GetPalette />}/>
         <Route path=':paletteId/:colorId' element={<GetSinglePalette />} /> 
       </Route>

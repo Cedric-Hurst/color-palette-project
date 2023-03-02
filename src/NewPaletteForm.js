@@ -17,6 +17,7 @@ import DraggableColorBox from './DraggableColorBox';
 import { v4 as uuid } from 'uuid'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 400;
 
@@ -65,11 +66,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function NewPaletteForm() { 
+export default function NewPaletteForm(props) { 
     const [open, setOpen] = React.useState(false);
     const [currentColor, setCurrentColor] = React.useState('teal');
     const [colors, setColors] = React.useState([{color: 'blue', name: 'blue'}]);
     const [newName, setNewName] = React.useState('');
+    const navigate = useNavigate();
 
     useEffect(() => { 
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
@@ -104,11 +106,23 @@ export default function NewPaletteForm() {
     const handleTextChange = (e) => {
         setNewName(e.target.value);
     }
+    const handlePaletteSave = () => { 
+        let newPaletteName =  'new Test Palette'
+        const { savePalette } = props;
+        const newPalette = {
+            paletteName: newPaletteName,
+            colors: colors,
+            emoji: '🧨',
+            id: newPaletteName.toLowerCase.replace(' ', '-')
+        }
+        savePalette(newPalette);
+        navigate('/');
+    }
 
   return (
     <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar position="fixed" open={open} color="default">
             <Toolbar>
                 <IconButton
                     color="inherit"
@@ -122,6 +136,8 @@ export default function NewPaletteForm() {
                 <Typography variant="h6" noWrap component="div">
                     Create New Color Palette
                 </Typography>
+                <Button variant="contained" color="secondary">Go Back</Button>
+                <Button variant="contained" color="primary" onClick={handlePaletteSave}>Save Palette</Button>
             </Toolbar>
         </AppBar>
         <Drawer
@@ -145,7 +161,7 @@ export default function NewPaletteForm() {
             <Divider />
             <Typography variant='h4'>
                 Design Your Palette
-            </Typography>
+              </Typography>
             <Stack direction="row">
                 <Button variant="contained" color="secondary">Clear Palette</Button>
                 <Button variant="contained" color="primary">Random Color</Button>
