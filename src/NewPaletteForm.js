@@ -70,13 +70,20 @@ export default function NewPaletteForm(props) {
     const [open, setOpen] = React.useState(false);
     const [currentColor, setCurrentColor] = React.useState('teal');
     const [colors, setColors] = React.useState([{color: 'blue', name: 'blue'}]);
-    const [newName, setNewName] = React.useState('');
+    const [newColorName, setNewColorName] = React.useState('');
+    const [newPaletteName, setNewPaletteName] = React.useState('');
+    const { palettes } = props;
     const navigate = useNavigate();
 
     useEffect(() => { 
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
             return colors.every(
                 ({name}) => name.toLowerCase() !== value.toLowerCase()
+            )
+        })
+        ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => {
+            return palettes.every(
+                ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
             )
         })
         ValidatorForm.addValidationRule('isColorUnique', (value) => {
@@ -98,22 +105,22 @@ export default function NewPaletteForm(props) {
     const addNewColor = () => { 
         const newColor = {
             color: currentColor,
-            name: newName
+            name: newColorName
         }
         setColors([...colors, newColor])
-        setNewName('')
+        setNewColorName('')
     }
     const handleTextChange = (e) => {
-        setNewName(e.target.value);
+        e.target.name === 'newColorName' && setNewColorName(e.target.value);
+        e.target.name === 'newPaletteName' && setNewPaletteName(e.target.value);
     }
     const handlePaletteSave = () => { 
-        let newPaletteName =  'new Test Palette'
         const { savePalette } = props;
         const newPalette = {
             paletteName: newPaletteName,
             colors: colors,
             emoji: '🧨',
-            id: newPaletteName.toLowerCase.replace(' ', '-')
+            id: newPaletteName.toLowerCase().replace(' ', '-')
         }
         savePalette(newPalette);
         navigate('/');
@@ -137,7 +144,17 @@ export default function NewPaletteForm(props) {
                     Create New Color Palette
                 </Typography>
                 <Button variant="contained" color="secondary">Go Back</Button>
-                <Button variant="contained" color="primary" onClick={handlePaletteSave}>Save Palette</Button>
+                <ValidatorForm onSubmit={handlePaletteSave}>
+                    <TextValidator
+                        value={newPaletteName}
+                        onChange={handleTextChange}
+                        name='newPaletteName'
+                        label='Palette Name'
+                        validators={['required', 'isPaletteNameUnique']}
+                        errorMessages={['Enter a Palette Name', 'Name already used']}
+                    />
+                    <Button variant="contained" color="primary" type="submit">Save Palette</Button>
+                </ValidatorForm>
             </Toolbar>
         </AppBar>
         <Drawer
@@ -169,8 +186,9 @@ export default function NewPaletteForm(props) {
               <ChromePicker color={currentColor} onChangeComplete={handleColorChange} />
               <ValidatorForm onSubmit={addNewColor}>
                   <TextValidator
-                      value={newName}
+                      value={newColorName}
                       onChange={handleTextChange}
+                      name='newColorName'
                       validators={['required', 'isColorNameUnique', 'isColorUnique']}
                       errorMessages={['Enter a Color Name', 'Name must be unique!', 'Color must be unique!']}
                   />

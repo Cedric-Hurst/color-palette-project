@@ -33,7 +33,7 @@ function App() {
       <Route index element={<PaletteList palettes={palettes} />} />
       <Route path='/palette'>
         <Route index element={<Navigate to='/'/>}/>
-        <Route path='new' element={<NewPaletteForm savePalette={savePalette} />}/>
+        <Route path='new' element={<NewPaletteForm savePalette={savePalette} palettes={palettes} />}/>
         <Route path=':id' element={<GetPalette />}/>
         <Route path=':paletteId/:colorId' element={<GetSinglePalette />} /> 
       </Route>
