@@ -1,5 +1,12 @@
 const styles = {
     root: {
+        width: '100%',
+        height: '100%',
+        "&:hover svg": {
+            color: 'white',
+        }
+    },
+    container: {
         width: '20%',
         height: '25%',
         display: 'inline-block',
@@ -7,9 +14,6 @@ const styles = {
         position: 'relative',
         cursor: 'pointer',
         marginBottom: '-4.5px',
-        "&:hover svg": {
-            color: 'white',
-        }
     },
     boxContent: {
         position: 'absolute',

@@ -18,6 +18,16 @@ import { v4 as uuid } from 'uuid'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+    DndContext,
+    closestCenter,
+    KeyboardSensor,
+    TouchSensor,
+    MouseSensor,
+    useSensor,
+    useSensors,
+} from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, } from '@dnd-kit/sortable';
 
 const drawerWidth = 400;
 
@@ -74,7 +84,29 @@ export default function NewPaletteForm(props) {
     const [newPaletteName, setNewPaletteName] = React.useState('');
     const { palettes } = props;
     const navigate = useNavigate();
+    const colorNames = colors.map(color => color.name);
 
+    const sensors = useSensors(
+        useSensor(MouseSensor, {
+        activationConstraint: {
+            delay: 100,
+            tolerance: 10
+        },
+        }),
+        useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+        activationConstraint: {
+            delay: 100,
+            tolerance: 10
+        },
+        }),
+        useSensor(TouchSensor, {
+        activationConstraint: {
+            delay: 100,
+            tolerance: 10
+        },
+        }),
+    );
     useEffect(() => { 
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
             return colors.every(
@@ -128,6 +160,16 @@ export default function NewPaletteForm(props) {
         }
         savePalette(newPalette);
         navigate('/');
+    }
+    const handleDragEnd = (e) => { 
+        const { active, over } = e;
+        if (active.id !== over.id) {
+            const activeIndex = colors.map(color => color.name).indexOf(active.id);
+            const overIndex = colors.map(color => color.name).indexOf(over.id);
+            setColors((colors) => {
+                return arrayMove(colors, activeIndex, overIndex);
+            })
+        }
     }
   return (
     <Box sx={{ display: 'flex' }}>
@@ -206,18 +248,23 @@ export default function NewPaletteForm(props) {
                 </Button>
               </ValidatorForm>
               
-        </Drawer>
-        <Main open={open}>
-            <DrawerHeader />
-              {colors.map(color =>
-                  <DraggableColorBox
-                      key={uuid()}
-                      color={color.color}
-                      name={color.name}
-                      handleDelete={() => deleteColorBox(color.name)}
-                  />
-              )}
-        </Main>
+          </Drawer>
+          
+          <Main open={open}>
+                <DrawerHeader />
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={colorNames}>
+                        {colors.map(color =>
+                            <DraggableColorBox
+                                key={uuid()}
+                                color={color.color}
+                                name={color.name}
+                                handleDelete={() => deleteColorBox(color.name)}
+                            />
+                        )}
+                    </SortableContext>
+                </DndContext>
+              </Main>
     </Box>
   );
 }
