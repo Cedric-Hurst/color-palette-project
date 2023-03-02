@@ -110,6 +110,10 @@ export default function NewPaletteForm(props) {
         setColors([...colors, newColor])
         setNewColorName('')
     }
+    const deleteColorBox = (colorName) => {
+        const newColors = colors.filter(color => color.name !== colorName);
+        setColors([...newColors])
+    }
     const handleTextChange = (e) => {
         e.target.name === 'newColorName' && setNewColorName(e.target.value);
         e.target.name === 'newPaletteName' && setNewPaletteName(e.target.value);
@@ -205,7 +209,14 @@ export default function NewPaletteForm(props) {
         </Drawer>
         <Main open={open}>
             <DrawerHeader />
-              {colors.map(color => <DraggableColorBox key={uuid()} color={color.color} name={color.name} />)}
+              {colors.map(color =>
+                  <DraggableColorBox
+                      key={uuid()}
+                      color={color.color}
+                      name={color.name}
+                      handleDelete={() => deleteColorBox(color.name)}
+                  />
+              )}
         </Main>
     </Box>
   );
