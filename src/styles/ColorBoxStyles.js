@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 
 const styles = {
-     ColorBox: {
+    ColorBox: {
         width: '20%',
         height: props => props.showLink ? '25%': '50%',
         display: 'inline-block',

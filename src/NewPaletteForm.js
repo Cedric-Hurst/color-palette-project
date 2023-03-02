@@ -125,7 +125,6 @@ export default function NewPaletteForm(props) {
         savePalette(newPalette);
         navigate('/');
     }
-
   return (
     <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -144,16 +143,18 @@ export default function NewPaletteForm(props) {
                     Create New Color Palette
                 </Typography>
                 <Button variant="contained" color="secondary">Go Back</Button>
-                <ValidatorForm onSubmit={handlePaletteSave}>
-                    <TextValidator
-                        value={newPaletteName}
-                        onChange={handleTextChange}
-                        name='newPaletteName'
-                        label='Palette Name'
-                        validators={['required', 'isPaletteNameUnique']}
-                        errorMessages={['Enter a Palette Name', 'Name already used']}
-                    />
-                    <Button variant="contained" color="primary" type="submit">Save Palette</Button>
+                  <ValidatorForm onSubmit={handlePaletteSave}>
+                    <Stack direction="row">
+                        <TextValidator
+                            value={newPaletteName}
+                            onChange={handleTextChange}
+                            name='newPaletteName'
+                            label='Palette Name'
+                            validators={['required', 'isPaletteNameUnique']}
+                            errorMessages={['Enter a Palette Name', 'Name already used']}
+                        />
+                        <Button variant="contained" color="primary" type="submit">Save Palette</Button>
+                    </Stack>
                 </ValidatorForm>
             </Toolbar>
         </AppBar>
