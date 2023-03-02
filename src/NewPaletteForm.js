@@ -13,22 +13,11 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import DraggableColorBox from './DraggableColorBox';
-import { v4 as uuid } from 'uuid'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-    DndContext,
-    closestCenter,
-    KeyboardSensor,
-    TouchSensor,
-    MouseSensor,
-    useSensor,
-    useSensors,
-} from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, } from '@dnd-kit/sortable';
-
+import { arrayMove } from '@dnd-kit/sortable';
+import DraggableColorList from './DraggableColorList';
 const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -84,29 +73,7 @@ export default function NewPaletteForm(props) {
     const [newPaletteName, setNewPaletteName] = React.useState('');
     const { palettes } = props;
     const navigate = useNavigate();
-    const colorNames = colors.map(color => color.name);
-
-    const sensors = useSensors(
-        useSensor(MouseSensor, {
-        activationConstraint: {
-            delay: 100,
-            tolerance: 10
-        },
-        }),
-        useSensor(KeyboardSensor, {
-        coordinateGetter: sortableKeyboardCoordinates,
-        activationConstraint: {
-            delay: 100,
-            tolerance: 10
-        },
-        }),
-        useSensor(TouchSensor, {
-        activationConstraint: {
-            delay: 100,
-            tolerance: 10
-        },
-        }),
-    );
+    
     useEffect(() => { 
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
             return colors.every(
@@ -250,21 +217,10 @@ export default function NewPaletteForm(props) {
               
           </Drawer>
           
-          <Main open={open}>
+            <Main open={open}>
                 <DrawerHeader />
-                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                    <SortableContext items={colorNames}>
-                        {colors.map(color =>
-                            <DraggableColorBox
-                                key={uuid()}
-                                color={color.color}
-                                name={color.name}
-                                handleDelete={() => deleteColorBox(color.name)}
-                            />
-                        )}
-                    </SortableContext>
-                </DndContext>
-              </Main>
+                <DraggableColorList colors={colors} handleDragEnd={handleDragEnd} deleteColorBox={deleteColorBox} />
+            </Main>
     </Box>
   );
 }
