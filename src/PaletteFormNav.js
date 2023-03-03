@@ -11,8 +11,8 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { withStyles } from 'react-jss';
 import PaletteMetaForm from './PaletteMetaForm';
-
-const drawerWidth = 400;
+import styles from './styles/PaletteFormNavStyles';
+import { DRAWER_WIDTH as drawerWidth } from './constants';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -34,17 +34,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-const styles = {
-    navBtns: {
-        marginRight: "1rem",
-    },
-    root: {
-        display: 'flex',
-    },
-    btn: {
-        margin: '0 0.5rem'
-    }
-}
+
 function PaletteFormNav(props) {
     const { open, handleDrawerOpen, handlePaletteSave, newPaletteName, handleTextChange, classes } = props;
     return (

@@ -21,7 +21,6 @@ export default function PaletteMetaForm(props) {
     const handleSubmit = () => { 
         setStage('emoji');
     }
-
     return (
         <div>
             <Dialog open={stage === 'emoji'}>

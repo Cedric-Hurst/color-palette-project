@@ -15,9 +15,9 @@ import { arrayMove } from '@dnd-kit/sortable';
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
-import {withStyles} from 'react-jss';
-
-const drawerWidth = 400;
+import { withStyles } from 'react-jss';
+import styles from './styles/NewPaletteForm';
+import { DRAWER_WIDTH as drawerWidth } from './constants';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -46,22 +46,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
-const styles = {
-    drawer: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    drawerBtns: {
-        width: '100%',
-    },
-    drawerBtn: {
-        width: '50%',
-    }
-}
 
 function NewPaletteForm(props) { 
     const { palettes, classes } = props;
@@ -140,7 +124,6 @@ function NewPaletteForm(props) {
             emoji: emojiData.emoji,
             id: newPaletteName.toLowerCase().replace(' ', '-')
         }
-        console.log(emojiData)
         savePalette(newPalette);
         navigate('/');
     }
