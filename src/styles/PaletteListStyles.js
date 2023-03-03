@@ -1,10 +1,10 @@
 const styles = {
     root: {
         backgroundColor: "blue",
-        height: "100vh",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
+        paddingBottom: "10%",
 
     },
     container: {
@@ -29,7 +29,7 @@ const styles = {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(3,30%)",
-        gridGap: "5%"
+        gridGap: "2%"
     }
 }
 export default styles;
