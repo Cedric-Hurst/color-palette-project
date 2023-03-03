@@ -20,6 +20,7 @@ const AppBar = styled(MuiAppBar, {
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: '64px',
+    alignItems: 'center',
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -35,11 +36,14 @@ const AppBar = styled(MuiAppBar, {
 }));
 const styles = {
     navBtns: {
-    
+        marginRight: "1rem",
     },
     root: {
         display: 'flex',
         
+    },
+    btn: {
+        margin: '0 0.5rem'
     }
 }
 function PaletteFormNav(props) {
@@ -65,12 +69,13 @@ function PaletteFormNav(props) {
                 <div className={classes.navBtns}>
                     <Stack direction="row">
                         <Link to="/" style={{textDecoration: 'none'}}>
-                            <Button variant="contained" color="secondary">Go Back</Button>
+                            <Button variant="contained" color="secondary" className={classes.btn}>Go Back</Button>
                         </Link>
                         <PaletteMetaForm
                             handlePaletteSave={handlePaletteSave}
                             newPaletteName={newPaletteName}
                             handleTextChange={handleTextChange}
+                            className={classes.btn}
                         />
                     </Stack>
                 </div>
