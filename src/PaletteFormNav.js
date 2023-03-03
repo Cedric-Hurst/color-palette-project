@@ -6,8 +6,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Button from '@mui/material/Button';
+import PaletteIcon from '@mui/icons-material/Palette';import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { withStyles } from 'react-jss';
 import PaletteMetaForm from './PaletteMetaForm';
@@ -49,7 +48,7 @@ function PaletteFormNav(props) {
                         edge="start"
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
-                        <MenuIcon />
+                        {!open && <PaletteIcon color='action'/>}
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
                         Create New Color Palette
