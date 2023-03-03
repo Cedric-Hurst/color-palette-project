@@ -9,8 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import {withStyles} from 'react-jss';
+import { withStyles } from 'react-jss';
+import PaletteMetaForm from './PaletteMetaForm';
 
 const drawerWidth = 400;
 
@@ -35,7 +35,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 const styles = {
     navBtns: {
-
+    
     },
     root: {
         display: 'flex',
@@ -63,23 +63,16 @@ function PaletteFormNav(props) {
                     </Typography>
                 </Toolbar>
                 <div className={classes.navBtns}>
-                    <Link to="/" style={{textDecoration: 'none'}}>
-                        <Button variant="contained" color="secondary">Go Back</Button>
-                    </Link>
-                    <ValidatorForm onSubmit={handlePaletteSave}>
-                        <Stack direction="row">
-                            <TextValidator
-                                value={newPaletteName}
-                                onChange={handleTextChange}
-                                name='newPaletteName'
-                                label='Palette Name'
-                                variant='filled'
-                                validators={['required', 'isPaletteNameUnique']}
-                                errorMessages={['Enter a Palette Name', 'Name already used']}
-                            />
-                            <Button variant="contained" color="primary" type="submit">Save Palette</Button>
-                        </Stack>
-                    </ValidatorForm>
+                    <Stack direction="row">
+                        <Link to="/" style={{textDecoration: 'none'}}>
+                            <Button variant="contained" color="secondary">Go Back</Button>
+                        </Link>
+                        <PaletteMetaForm
+                            handlePaletteSave={handlePaletteSave}
+                            newPaletteName={newPaletteName}
+                            handleTextChange={handleTextChange}
+                        />
+                    </Stack>
                 </div>
             </AppBar>
         </div>
