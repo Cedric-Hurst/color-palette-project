@@ -15,6 +15,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
+import {withStyles} from 'react-jss';
 
 const drawerWidth = 400;
 
@@ -37,7 +38,6 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     }),
   }),
 );
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -46,9 +46,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+const styles = {
+    drawer: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    drawerBtns: {
+        width: '100%',
+    },
+    drawerBtn: {
+        width: '50%',
+    }
+}
 
-export default function NewPaletteForm(props) { 
-    const { palettes } = props;
+function NewPaletteForm(props) { 
+    const { palettes, classes } = props;
     const maxColors = 20;
     const [open, setOpen] = React.useState(false);
     const [currentColor, setCurrentColor] = React.useState('teal');
@@ -137,62 +153,76 @@ export default function NewPaletteForm(props) {
             })
         }
     }
-  return (
-    <Box sx={{ display: 'flex' }}>
-          <PaletteFormNav
-              open={open}
-              handleDrawerOpen={handleDrawerOpen}
-              handlePaletteSave={handlePaletteSave}
-              newPaletteName={newPaletteName}
-              handleTextChange={handleTextChange}
-          />
-        <Drawer
-            sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <PaletteFormNav
+                open={open}
+                handleDrawerOpen={handleDrawerOpen}
+                handlePaletteSave={handlePaletteSave}
+                newPaletteName={newPaletteName}
+                handleTextChange={handleTextChange}
+            />
+            <Drawer
+                sx={{
                 width: drawerWidth,
-                boxSizing: 'border-box',
-            },
-            }}
-            variant="persistent"
-            anchor="left"
-            open={open}
-        >
-        <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon />
-            </IconButton>
-        </DrawerHeader>
-            <Divider />
-            <Typography variant='h4'>
-                Design Your Palette
-              </Typography>
-            <Stack direction="row">
-                <Button variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
-                  <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={addRandomColor}
-                      disabled={colors.length >= maxColors}
-                  >
-                      Random Color
-                  </Button>
-              </Stack>
-              <ColorPickerForm
-                  currentColor={currentColor}
-                  handleColorChange={handleColorChange}
-                  addNewColor={addNewColor}
-                  newColorName={newColorName}
-                  handleTextChange={handleTextChange}
-                  isPaletteFull={isPaletteFull}
-              />    
-          </Drawer>
-          
-            <Main open={open}>
-                <DrawerHeader />
-                <DraggableColorList colors={colors} handleDragEnd={handleDragEnd} deleteColorBox={deleteColorBox} />
-            </Main>
-    </Box>
-  );
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: drawerWidth,
+                    boxSizing: 'border-box',
+                },
+                }}
+                variant="persistent"
+                anchor="left"
+                open={open}
+            >
+                <DrawerHeader>
+                    <IconButton onClick={handleDrawerClose}>
+                        <ChevronLeftIcon />
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <div className={classes.drawer}>
+                    <Typography variant='h4' gutterBottom>
+                        Design Your Palette
+                    </Typography>
+                    <div className={classes.drawerBtns}>
+                        <Stack direction="row">
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={clearColors}
+                                className={classes.drawerBtn}
+                            >
+                                Clear Palette
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={addRandomColor}
+                                className={classes.drawerBtn}
+                                disabled={colors.length >= maxColors}
+                            >
+                                Random Color
+                            </Button>
+                        </Stack>
+                    </div>
+                    <ColorPickerForm
+                        currentColor={currentColor}
+                        handleColorChange={handleColorChange}
+                        addNewColor={addNewColor}
+                        newColorName={newColorName}
+                        handleTextChange={handleTextChange}
+                        isPaletteFull={isPaletteFull}
+                    />  
+                </div>    
+            </Drawer>
+            
+                <Main open={open}>
+                    <DrawerHeader />
+                    <DraggableColorList colors={colors} handleDragEnd={handleDragEnd} deleteColorBox={deleteColorBox} />
+                </Main>
+        </Box>
+    );
 }
+
+export default withStyles(styles)(NewPaletteForm)

@@ -12,7 +12,6 @@ import Stack from '@mui/material/Stack';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {withStyles} from 'react-jss';
 
-
 const drawerWidth = 400;
 
 const AppBar = styled(MuiAppBar, {
@@ -74,6 +73,7 @@ function PaletteFormNav(props) {
                                 onChange={handleTextChange}
                                 name='newPaletteName'
                                 label='Palette Name'
+                                variant='filled'
                                 validators={['required', 'isPaletteNameUnique']}
                                 errorMessages={['Enter a Palette Name', 'Name already used']}
                             />
