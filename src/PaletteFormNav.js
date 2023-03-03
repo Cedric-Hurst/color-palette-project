@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {withStyles} from 'react-jss';
 
 
 const drawerWidth = 400;
@@ -17,6 +18,9 @@ const drawerWidth = 400;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: '64px',
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -30,10 +34,19 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-export default function PaletteFormNav(props) {
-    const { open, handleDrawerOpen, handlePaletteSave, newPaletteName, handleTextChange } = props;
+const styles = {
+    navBtns: {
+
+    },
+    root: {
+        display: 'flex',
+        
+    }
+}
+function PaletteFormNav(props) {
+    const { open, handleDrawerOpen, handlePaletteSave, newPaletteName, handleTextChange, classes } = props;
     return (
-        <div>
+        <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" open={open} color="default">
                 <Toolbar>
@@ -49,9 +62,11 @@ export default function PaletteFormNav(props) {
                     <Typography variant="h6" noWrap component="div">
                         Create New Color Palette
                     </Typography>
+                </Toolbar>
+                <div className={classes.navBtns}>
                     <Link to="/" style={{textDecoration: 'none'}}>
                         <Button variant="contained" color="secondary">Go Back</Button>
-                        </Link>
+                    </Link>
                     <ValidatorForm onSubmit={handlePaletteSave}>
                         <Stack direction="row">
                             <TextValidator
@@ -65,8 +80,9 @@ export default function PaletteFormNav(props) {
                             <Button variant="contained" color="primary" type="submit">Save Palette</Button>
                         </Stack>
                     </ValidatorForm>
-                </Toolbar>
+                </div>
             </AppBar>
         </div>
     )
 }
+export default withStyles(styles)(PaletteFormNav)
