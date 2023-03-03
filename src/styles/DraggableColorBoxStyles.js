@@ -13,7 +13,7 @@ const styles = {
         margin: '0 auto',
         position: 'relative',
         cursor: 'pointer',
-        marginBottom: '-4.5px',
+        marginBottom: '-7px',
     },
     boxContent: {
         position: 'absolute',

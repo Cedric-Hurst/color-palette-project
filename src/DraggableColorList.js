@@ -37,16 +37,16 @@ export default function DraggableColorList(props) {
     );
     return (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                    <SortableContext items={colorNames}>
-                        {colors.map(color =>
-                            <DraggableColorBox
-                                key={uuid()}
-                                color={color.color}
-                                name={color.name}
-                                handleDelete={() => deleteColorBox(color.name)}
-                            />
-                        )}
-                    </SortableContext>
-                </DndContext>
+            <SortableContext items={colorNames}>
+                {colors.map(color =>
+                    <DraggableColorBox
+                        key={uuid()}
+                        color={color.color}
+                        name={color.name}
+                        handleDelete={() => deleteColorBox(color.name)}
+                    />
+                )}
+            </SortableContext>
+        </DndContext>
     )
 }

@@ -66,14 +66,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function NewPaletteForm(props) { 
+    const { palettes } = props;
+    const maxColors = 20;
     const [open, setOpen] = React.useState(false);
     const [currentColor, setCurrentColor] = React.useState('teal');
-    const [colors, setColors] = React.useState([{color: 'blue', name: 'blue'}]);
+    const [colors, setColors] = React.useState(palettes[0].colors);
     const [newColorName, setNewColorName] = React.useState('');
     const [newPaletteName, setNewPaletteName] = React.useState('');
-    const { palettes } = props;
     const navigate = useNavigate();
-    
+    const isPaletteFull = colors.length >= maxColors;
     useEffect(() => { 
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
             return colors.every(
@@ -108,6 +109,21 @@ export default function NewPaletteForm(props) {
         }
         setColors([...colors, newColor])
         setNewColorName('')
+    }
+    const clearColors = () => {
+        setColors([]);
+    }
+    const addRandomColor = () => { 
+        const palette = Math.floor(Math.random() * palettes.length);
+        const color = Math.floor(Math.random() * palettes[palette].colors.length);
+        const newColor = palettes[palette].colors[color];
+        if (colors.every(
+            ({ name }) => name.toLowerCase() !== newColor.name.toLowerCase() //check for dupes
+        )) {
+            setColors([...colors, newColor])
+        } else {
+            addRandomColor();
+        }
     }
     const deleteColorBox = (colorName) => {
         const newColors = colors.filter(color => color.name !== colorName);
@@ -155,7 +171,7 @@ export default function NewPaletteForm(props) {
                 <Typography variant="h6" noWrap component="div">
                     Create New Color Palette
                 </Typography>
-                <Button variant="contained" color="secondary">Go Back</Button>
+                <Button variant="contained" color="secondary" onClick={()=> navigate('/')}>Go Back</Button>
                   <ValidatorForm onSubmit={handlePaletteSave}>
                     <Stack direction="row">
                         <TextValidator
@@ -194,8 +210,15 @@ export default function NewPaletteForm(props) {
                 Design Your Palette
               </Typography>
             <Stack direction="row">
-                <Button variant="contained" color="secondary">Clear Palette</Button>
-                <Button variant="contained" color="primary">Random Color</Button>
+                <Button variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
+                  <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={addRandomColor}
+                      disabled={colors.length >= maxColors}
+                  >
+                      Random Color
+                  </Button>
             </Stack>
               <ChromePicker color={currentColor} onChangeComplete={handleColorChange} />
               <ValidatorForm onSubmit={addNewColor}>
@@ -207,11 +230,12 @@ export default function NewPaletteForm(props) {
                       errorMessages={['Enter a Color Name', 'Name must be unique!', 'Color must be unique!']}
                   />
                   <Button
-                    style={{ backgroundColor: currentColor }}
+                    style={{ backgroundColor: isPaletteFull ? 'grey' : currentColor }}
                     variant="contained"
                     type='submit'
-                >
-                    Add Color
+                    disabled={isPaletteFull}
+                  >
+                      {isPaletteFull? 'Palette Full' : 'Add Color'}
                 </Button>
               </ValidatorForm>
               

@@ -25,10 +25,7 @@ function DraggableColorBox(props) {
             style={style}
             className={classes.container}
         >
-            <div
-                style={{ backgroundColor: color }}
-                className={classes.root}
-            >
+            <div style={{ backgroundColor: color }} className={classes.root}>
                 <div className={classes.boxContent}>
                     <span>{name}</span>
                     <span><DeleteOutlinedIcon className={classes.deleteIcon} onClick={handleDelete}/></span>
