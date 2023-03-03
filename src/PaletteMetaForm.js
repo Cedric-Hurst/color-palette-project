@@ -6,27 +6,33 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import EmojiPicker from 'emoji-picker-react';
 
 export default function PaletteMetaForm(props) {
-    const [open, setOpen] = React.useState(false);
+    const [stage, setStage] = React.useState('');
     const { handlePaletteSave, newPaletteName, handleTextChange } = props;
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setStage('form');
     };
-
     const handleClose = () => {
-        setOpen(false);
+        setStage('');
     };
+    const handleSubmit = () => { 
+        setStage('emoji');
+    }
 
     return (
         <div>
+            <Dialog open={stage === 'emoji'}>
+                <EmojiPicker onEmojiClick={handlePaletteSave} emojiStyle='native' emojiVersion='5.0'/>
+            </Dialog>
             <Button variant="contained" onClick={handleClickOpen}>
                 Save Palette
             </Button>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={stage === 'form'} onClose={handleClose}>
                 <DialogTitle>Choose a Palette Name</DialogTitle>
-                <ValidatorForm onSubmit={handlePaletteSave}> 
+                <ValidatorForm onSubmit={handleSubmit}> 
                     <DialogContent>
                         <DialogContentText>
                             Please choose a name for your new Palette. Make Sure it is unique.

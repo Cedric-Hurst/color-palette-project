@@ -132,14 +132,15 @@ function NewPaletteForm(props) {
         e.target.name === 'newColorName' && setNewColorName(e.target.value);
         e.target.name === 'newPaletteName' && setNewPaletteName(e.target.value);
     }
-    const handlePaletteSave = () => { 
+    const handlePaletteSave = (emojiData) => { 
         const { savePalette } = props;
         const newPalette = {
             paletteName: newPaletteName,
             colors: colors,
-            emoji: '🧨',
+            emoji: emojiData.emoji,
             id: newPaletteName.toLowerCase().replace(' ', '-')
         }
+        console.log(emojiData)
         savePalette(newPalette);
         navigate('/');
     }
