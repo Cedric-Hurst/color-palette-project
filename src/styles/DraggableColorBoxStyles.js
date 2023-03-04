@@ -14,6 +14,9 @@ const styles = {
         position: 'relative',
         cursor: 'pointer',
         marginBottom: '-7px',
+        "&:active": {
+            zIndex: 9999
+        }
     },
     boxContent: {
         position: 'absolute',

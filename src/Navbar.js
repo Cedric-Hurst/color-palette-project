@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -71,12 +70,12 @@ class Navbar extends Component {
                 <div className={classes.selectContainer}>
                     <Box sx={{ minWidth: 100 }}>
                         <FormControl fullWidth>
-                            <InputLabel id="select">Color Format</InputLabel>
                             <Select
                                 labelId="select"
                                 id="color-select"
                                 value={colorFormat}
                                 label="Color Format"
+                                variant='standard'
                                 onChange={this.handleChange}
                             >
                                 <MenuItem value="hex">HEX - #ffffff</MenuItem>
