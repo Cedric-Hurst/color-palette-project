@@ -5,10 +5,11 @@ import { Routes, Route, useParams, Navigate } from 'react-router-dom'
 import PaletteList from './PaletteList'
 import SingleColorPalette from './SingleColorPalette'
 import NewPaletteForm from './NewPaletteForm'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
-  const [palettes, setPalettes] = useState(seedColors);
+  const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
+  const [palettes, setPalettes] = useState(savedPalettes || seedColors);
 
   const findPalette = id => palettes.find(palette => palette.id === id);
   const GetPalette = () => {
@@ -27,6 +28,10 @@ function App() {
   const savePalette = (newPalette) => {
     setPalettes([...palettes, newPalette]);
   }
+
+  useEffect(() => {
+     window.localStorage.setItem('palettes', JSON.stringify(palettes));
+  },[palettes])
 
   return (
     <Routes>
