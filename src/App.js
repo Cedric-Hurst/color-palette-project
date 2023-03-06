@@ -28,6 +28,9 @@ function App() {
   const savePalette = (newPalette) => {
     setPalettes([...palettes, newPalette]);
   }
+  const deletePalette = (id) => {
+    setPalettes(palettes.filter(p => p.id !== id));
+  }
 
   useEffect(() => {
      window.localStorage.setItem('palettes', JSON.stringify(palettes));
@@ -35,7 +38,7 @@ function App() {
 
   return (
     <Routes>
-      <Route index element={<PaletteList palettes={palettes} />} />
+      <Route index element={<PaletteList palettes={palettes} deletePalette={deletePalette} />} />
       <Route path='/palette'>
         <Route index element={<Navigate to='/'/>}/>
         <Route path='new' element={<NewPaletteForm savePalette={savePalette} palettes={palettes} />}/>

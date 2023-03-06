@@ -5,17 +5,23 @@ import {v4 as uuid} from 'uuid'
 import styles from './styles/MiniPaletteStyles'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-function MiniPalette({ classes, paletteName, emoji, id, colors }) {
+function MiniPalette({ classes, paletteName, emoji, id, colors, deletePalette }) {
     const navigate = useNavigate();
     const handleClick = e => {
         e.preventDefault();
         navigate(`/palette/${id}`);
     }
+    const handleDelete = (e) => { 
+        e.stopPropagation();
+        deletePalette(id);
+    }
     return (
         <div className={classes.root} onClick={handleClick}>
-            <div className={classes.delete}>
-                <DeleteOutlinedIcon className={classes.deleteIcon} style={{transition: 'all 0.3s ease-in-out'}} />
-            </div>
+            <DeleteOutlinedIcon
+                className={classes.deleteIcon}
+                style={{ transition: 'all 0.3s ease-in-out' }}
+                onClick={handleDelete}
+            />
                 <div className={classes.colors}>
                     {colors.map(color =>
                         <div
