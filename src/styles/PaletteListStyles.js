@@ -1,13 +1,15 @@
 import sizes from './sizes';
+import bg from '../bg.svg'
 
 const styles = {
     root: {
-        backgroundColor: "blue",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
         paddingBottom: "9rem",
-       
+        backgroundColor: '#1D179A',
+        backgroundImage: `url(${bg})`
+        //background by SVGbackgrounds.com
     },
     container: {
         width: "50%",
