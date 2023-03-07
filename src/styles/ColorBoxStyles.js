@@ -14,16 +14,15 @@ const styles = {
         },
         [sizes.down('xl')]: {
              width: '25%',
-             height: props => props.showLink ? '20%': '30%',
+             height: props => props.showLink ? '20%': '33.333%',
         },
          [sizes.down('lg')]: {
              width: '50%',
-             height: props => props.showLink ? '10%': '25%',
+             height: props => props.showLink ? '10%': '20%',
         },
          [sizes.down('sm')]: {
             width: '100%',
-            height: props => props.showLink ? '5%': '11%',
-
+            height: props => props.showLink ? '5%': '10%',
         },
 
     },
@@ -114,7 +113,10 @@ const styles = {
             textAlign: 'center',
             marginBottom: 0,
             padding: '1rem',
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
+            [sizes.down('sm')]: {
+                fontSize: '5rem',
+            },
         },
         '& p': {
             fontSize: '2rem',

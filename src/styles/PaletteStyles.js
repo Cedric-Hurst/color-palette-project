@@ -1,3 +1,5 @@
+import sizes from './sizes';
+
 const styles = {
     Palette: {
         height: '97vh',
@@ -35,7 +37,20 @@ const styles = {
             border: 'none',
             cursor: 'pointer',
             textDecoration: 'none'
-        }
+        },
+        [sizes.down('xl')]: {
+             width: '25%',
+             height: '33.333%',
+        },
+         [sizes.down('lg')]: {
+             width: '50%',
+             height: '20%',
+        },
+         [sizes.down('sm')]: {
+            width: '100%',
+            height: '10%',
+
+        },
     }
 }
 export default styles;
