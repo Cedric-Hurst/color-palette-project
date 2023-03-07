@@ -1,3 +1,5 @@
+import sizes from './sizes';
+
 const styles = {
     Navbar: {
         display: 'flex',
@@ -9,6 +11,12 @@ const styles = {
         width: '340px',
         margin: '0 10px',
         display: 'inline-block',
+         [sizes.down('lg')]: {
+             width: '240px',
+        },
+         [sizes.down('md')]: {
+             width: '200px',
+        },
     },
     logo: {
         marginRight: '15px',
@@ -22,7 +30,10 @@ const styles = {
         "& a": {
             textDecoration: 'none',
             color: 'black',
-            }
+        },
+        [sizes.down('sm')]: {
+           display: props => props.showSlider && 'none'
+        },
     },
     selectContainer: {
         marginLeft: 'auto',

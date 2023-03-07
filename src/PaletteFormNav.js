@@ -50,7 +50,7 @@ function PaletteFormNav(props) {
                     >
                         {!open && <PaletteIcon color='action'/>}
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" noWrap component="div"  className={classes.title}>
                         Create New Color Palette
                     </Typography>
                 </Toolbar>

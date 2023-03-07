@@ -49,7 +49,6 @@ const styles = {
          [sizes.down('sm')]: {
             width: '100%',
             height: '10%',
-
         },
     }
 }

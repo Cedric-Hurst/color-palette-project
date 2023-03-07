@@ -1,3 +1,5 @@
+import sizes from './sizes';
+
 const styles = {
     root: {
         width: '100%',
@@ -16,7 +18,19 @@ const styles = {
         marginBottom: '-7px',
         "&:active": {
             zIndex: 9999
-        }
+        },
+        [sizes.down('xl')]: {
+             width: '25%',
+             height: '20%',
+        },
+         [sizes.down('lg')]: {
+             width: '50%',
+             height:'10%',
+        },
+         [sizes.down('sm')]: {
+            width: '100%',
+            height:'5%',
+        },
     },
     boxContent: {
         position: 'absolute',
