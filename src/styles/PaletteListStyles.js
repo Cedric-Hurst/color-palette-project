@@ -2,13 +2,22 @@ import sizes from './sizes';
 import bg from '../bg.svg'
 
 const styles = {
+    '@global': {
+        '.fade-exit': {
+            opacity: 1
+        },
+        '.fade-exit-active': {
+            opacity: 0,
+            transition: 'opacity 0.5s ease-out' 
+        }
+    },
     root: {
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
-        paddingBottom: "9rem",
         backgroundColor: '#1D179A',
-        backgroundImage: `url(${bg})`
+        backgroundImage: `url(${bg})`,
+        minHeight: '100vh',
         //background by SVGbackgrounds.com
     },
     container: {
