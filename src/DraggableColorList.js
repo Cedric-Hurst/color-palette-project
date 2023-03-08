@@ -17,21 +17,18 @@ export default function DraggableColorList(props) {
     const sensors = useSensors(
         useSensor(MouseSensor, {
         activationConstraint: {
-            delay: 100,
-            tolerance: 10
+            distance: 15,
         },
         }),
         useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
         activationConstraint: {
-            delay: 100,
-            tolerance: 10
+            distance: 15,
         },
         }),
         useSensor(TouchSensor, {
         activationConstraint: {
-            delay: 100,
-            tolerance: 10
+            distance: 15,
         },
         }),
     );
