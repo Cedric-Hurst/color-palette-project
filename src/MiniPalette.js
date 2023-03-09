@@ -5,7 +5,7 @@ import {v4 as uuid} from 'uuid'
 import styles from './styles/MiniPaletteStyles'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-function MiniPalette({ classes, paletteName, emoji, id, colors, openDialog }) {
+const MiniPalette = React.memo(({ classes, paletteName, emoji, id, colors, openDialog }) => {
     const navigate = useNavigate();
     const handleClick = e => {
         e.preventDefault();
@@ -17,6 +17,7 @@ function MiniPalette({ classes, paletteName, emoji, id, colors, openDialog }) {
     }
     return (
         <div className={classes.root} onClick={handleClick}>
+            
             <DeleteOutlinedIcon
                 className={classes.deleteIcon}
                 style={{ transition: 'all 0.3s ease-in-out' }}
@@ -31,8 +32,8 @@ function MiniPalette({ classes, paletteName, emoji, id, colors, openDialog }) {
                         />
                     )}
                 </div>
-                <h5 className={classes.title}>{paletteName} <span className={classes.emoji}>{emoji}</span></h5>
+            <h5 className={classes.title}>{paletteName} <span className={classes.emoji}>{emoji}</span></h5>
             </div>
     )
-}
+})
 export default withStyles(styles)(MiniPalette);
