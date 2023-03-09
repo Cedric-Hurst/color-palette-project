@@ -21,10 +21,14 @@ export default function PaletteMetaForm(props) {
     const handleSubmit = () => { 
         setStage('emoji');
     }
+    const handleSave = (emojiData) => { 
+        handlePaletteSave(emojiData);
+        setStage('');
+    }
     return (
         <div>
             <Dialog open={stage === 'emoji'}>
-                <EmojiPicker onEmojiClick={handlePaletteSave} emojiStyle='native' emojiVersion='5.0'/>
+                <EmojiPicker onEmojiClick={handleSave} emojiStyle='native' emojiVersion='5.0'/>
             </Dialog>
             <Button variant="contained" onClick={handleClickOpen}>
                 Save Palette

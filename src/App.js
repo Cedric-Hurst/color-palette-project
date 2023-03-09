@@ -7,7 +7,8 @@ import SingleColorPalette from './SingleColorPalette'
 import NewPaletteForm from './NewPaletteForm'
 import { useState, useEffect } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './App.css'
+import Page from './Page';
+import HomePage from './HomePage';
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
@@ -40,14 +41,14 @@ function App() {
   const location = useLocation();
   return (
     <TransitionGroup component={null}>
-      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+      <CSSTransition key={location.key} classNames="page" timeout={300}>
         <Routes location={location}>
-          <Route index element={<div className='page'><PaletteList palettes={palettes} deletePalette={deletePalette}/></div>} />
+          <Route index element={<HomePage><PaletteList palettes={palettes} deletePalette={deletePalette}/></HomePage>} />
           <Route path='/palette'>
-            <Route index element={<div className='page'><Navigate to='/'/></div>}/>
-            <Route path='new' element={<div className='page'><NewPaletteForm savePalette={savePalette} palettes={palettes} /></div>}/>
-            <Route path=':id' element={<div className='page'><GetPalette /></div>}/>
-            <Route path=':paletteId/:colorId' element={<div className='page'><GetSinglePalette /></div>} /> 
+            <Route index element={<HomePage><Navigate to='/'/></HomePage>}/>
+            <Route path='new' element={<Page><NewPaletteForm savePalette={savePalette} palettes={palettes} /></Page>}/>
+            <Route path=':id' element={<Page><GetPalette /></Page>}/>
+            <Route path=':paletteId/:colorId' element={<Page><GetSinglePalette /></Page>} /> 
           </Route>
           <Route path='*' element={<h1>Page Not Found</h1>} />
         </Routes>

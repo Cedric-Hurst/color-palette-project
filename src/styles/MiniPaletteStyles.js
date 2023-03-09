@@ -42,9 +42,6 @@ const styles = {
         fontSize: "1.5rem",
 
     },
-    delete: {
-
-    },
     deleteIcon: {
         color: 'white',
         backgroundColor: '#eb3d30',

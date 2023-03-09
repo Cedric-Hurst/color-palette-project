@@ -1,5 +1,5 @@
 import sizes from './sizes';
-import bg from '../bg.svg'
+import bg from './bg.svg'
 
 const styles = {
     '@global': {
@@ -9,7 +9,7 @@ const styles = {
         '.fade-exit-active': {
             opacity: 0,
             transition: 'opacity 0.5s ease-out' 
-        }
+        },
     },
     root: {
         display: "flex",
