@@ -4,10 +4,7 @@ import { withStyles } from 'react-jss'
 import {v4 as uuid} from 'uuid'
 import styles from './styles/PaletteListStyles'
 import { Link } from 'react-router-dom'
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';

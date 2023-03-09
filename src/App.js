@@ -1,11 +1,13 @@
 import Palette from './Palette'
 import seedColors from './seedColors'
 import { generatePalette } from './colorHelpers'
-import { Routes, Route, useParams, Navigate } from 'react-router-dom'
+import { Routes, Route, useParams, Navigate, useLocation } from 'react-router-dom'
 import PaletteList from './PaletteList'
 import SingleColorPalette from './SingleColorPalette'
 import NewPaletteForm from './NewPaletteForm'
 import { useState, useEffect } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './App.css'
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
@@ -35,18 +37,22 @@ function App() {
   useEffect(() => {
      window.localStorage.setItem('palettes', JSON.stringify(palettes));
   },[palettes])
-
+  const location = useLocation();
   return (
-    <Routes>
-      <Route index element={<PaletteList palettes={palettes} deletePalette={deletePalette} />} />
-      <Route path='/palette'>
-        <Route index element={<Navigate to='/'/>}/>
-        <Route path='new' element={<NewPaletteForm savePalette={savePalette} palettes={palettes} />}/>
-        <Route path=':id' element={<GetPalette />}/>
-        <Route path=':paletteId/:colorId' element={<GetSinglePalette />} /> 
-      </Route>
-      <Route path='*' element={<h1>Page Not Found</h1>} />
-    </Routes>
+    <TransitionGroup component={null}>
+      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+        <Routes location={location}>
+          <Route index element={<div className='page'><PaletteList palettes={palettes} deletePalette={deletePalette}/></div>} />
+          <Route path='/palette'>
+            <Route index element={<div className='page'><Navigate to='/'/></div>}/>
+            <Route path='new' element={<div className='page'><NewPaletteForm savePalette={savePalette} palettes={palettes} /></div>}/>
+            <Route path=':id' element={<div className='page'><GetPalette /></div>}/>
+            <Route path=':paletteId/:colorId' element={<div className='page'><GetSinglePalette /></div>} /> 
+          </Route>
+          <Route path='*' element={<h1>Page Not Found</h1>} />
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
   );
 }
 
