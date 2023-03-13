@@ -9,13 +9,12 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { ValidatorForm} from 'react-material-ui-form-validator';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { arrayMove } from '@dnd-kit/sortable';
+import { withStyles } from 'react-jss';
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
-import { withStyles } from 'react-jss';
 import styles from './styles/NewPaletteForm';
 import { DRAWER_WIDTH as drawerWidth } from './constants';
 
@@ -58,7 +57,7 @@ function NewPaletteForm(props) {
     const navigate = useNavigate();
     const isPaletteFull = colors.length >= maxColors;
 
-    useEffect(() => { 
+    React.useEffect(() => { 
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
             return colors.every(
                 ({name}) => name.toLowerCase() !== value.toLowerCase()

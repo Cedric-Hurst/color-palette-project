@@ -1,5 +1,6 @@
-import styles from './styles/PaletteFooterStyles'
 import withStyles from 'react-jss';
+import styles from './styles/PaletteFooterStyles'
+
 function PaletteFooter(props) {
     const { paletteName, emoji, classes } = props;
     return (

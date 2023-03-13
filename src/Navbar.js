@@ -9,8 +9,8 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
-import styles from './styles/NavbarStyles'
 import withStyles from 'react-jss';
+import styles from './styles/NavbarStyles'
 
 class Navbar extends Component { 
     constructor(props) {

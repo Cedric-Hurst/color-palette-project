@@ -1,4 +1,3 @@
-import DraggableColorBox from './DraggableColorBox';
 import { v4 as uuid } from 'uuid'
 import { SortableContext, sortableKeyboardCoordinates, } from '@dnd-kit/sortable';
 import {
@@ -10,6 +9,8 @@ import {
     useSensor,
     useSensors,
 } from '@dnd-kit/core';
+import DraggableColorBox from './DraggableColorBox';
+
 export default function DraggableColorList(props) {
     const {colors, deleteColorBox, handleDragEnd} = props;
     const colorNames = colors.map(color => color.name);

@@ -1,8 +1,6 @@
 import React from 'react'
-import MiniPalette from './MiniPalette'
 import { withStyles } from 'react-jss'
 import {v4 as uuid} from 'uuid'
-import styles from './styles/PaletteListStyles'
 import { Link } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Dialog from '@mui/material/Dialog';
@@ -16,7 +14,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
 import { blue, red } from '@mui/material/colors';
-
+import MiniPalette from './MiniPalette'
+import styles from './styles/PaletteListStyles'
 
 function PaletteList(props) { 
     const [open, setOpen] = React.useState(false);

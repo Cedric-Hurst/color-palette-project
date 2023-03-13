@@ -2,8 +2,9 @@ import React from 'react'
 import { withStyles } from 'react-jss'
 import { useNavigate } from 'react-router-dom'
 import {v4 as uuid} from 'uuid'
-import styles from './styles/MiniPaletteStyles'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import styles from './styles/MiniPaletteStyles'
+
 
 const MiniPalette = React.memo(({ classes, paletteName, emoji, id, colors, openDialog }) => {
     const navigate = useNavigate();

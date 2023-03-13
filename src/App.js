@@ -1,12 +1,12 @@
-import Palette from './Palette'
-import seedColors from './seedColors'
-import { generatePalette } from './colorHelpers'
 import { Routes, Route, useParams, Navigate, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PaletteList from './PaletteList'
 import SingleColorPalette from './SingleColorPalette'
 import NewPaletteForm from './NewPaletteForm'
-import { useState, useEffect } from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import Palette from './Palette'
+import seedColors from './seedColors'
+import { generatePalette } from './colorHelpers'
 import Page from './Page';
 import HomePage from './HomePage';
 

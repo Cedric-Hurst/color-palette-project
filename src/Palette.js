@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import { v4 as uuid } from 'uuid'
+import { withStyles } from 'react-jss'
 import ColorBox from './ColorBox'
 import Navbar from './Navbar';
-import { v4 as uuid } from 'uuid'
 import PaletteFooter from './PaletteFooter';
-import { withStyles } from 'react-jss'
 import styles from './styles/PaletteStyles'
 class Palette extends Component { 
     constructor(props) { 
