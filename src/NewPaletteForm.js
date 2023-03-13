@@ -16,6 +16,7 @@ import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import styles from './styles/NewPaletteForm';
+import seedColors from './seedColors';
 import { DRAWER_WIDTH as drawerWidth } from './constants';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -51,7 +52,7 @@ function NewPaletteForm(props) {
     const maxColors = 20;
     const [open, setOpen] = React.useState(false);
     const [currentColor, setCurrentColor] = React.useState('teal');
-    const [colors, setColors] = React.useState(palettes[0].colors);
+    const [colors, setColors] = React.useState(seedColors[0].colors);
     const [newColorName, setNewColorName] = React.useState('');
     const [newPaletteName, setNewPaletteName] = React.useState('');
     const navigate = useNavigate();

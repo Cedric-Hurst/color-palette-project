@@ -1,3 +1,4 @@
+import chroma from 'chroma-js';
 import sizes from './sizes';
 
 const styles = {
@@ -5,7 +6,7 @@ const styles = {
         width: '100%',
         height: '100%',
         "&:hover svg": {
-            color: 'white',
+            color:'white',
         }
     },
     container: {
@@ -38,7 +39,7 @@ const styles = {
         width: '100%',
         left: '0px',
         bottom: '0px',
-        color: 'black',
+        color: props => chroma(props.color).luminance() <= 0.1 ? 'rgba(255,255,255,0.5)' : 'black',
         letterSpacing: '1px',
         textTransform: 'uppercase',
         fontSize: '12px',
@@ -46,7 +47,7 @@ const styles = {
         justifyContent: 'space-between',
     },
     deleteIcon: {
-        color: 'rgba(0,0,0,0.5)',
+        color: props => chroma(props.color).luminance() <= 0.1 ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
         transition: 'all 0.3s ease-in-out',
         "&:hover": {
             scale: 1.5
