@@ -50,7 +50,7 @@ function App() {
             <Route path=':id' element={<Page><GetPalette /></Page>}/>
             <Route path=':paletteId/:colorId' element={<Page><GetSinglePalette /></Page>} /> 
           </Route>
-          <Route path='*' element={<h1>Page Not Found</h1>} />
+          <Route path='*' element={<HomePage><PaletteList palettes={palettes} deletePalette={deletePalette}/></HomePage>} />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
